@@ -1,4 +1,4 @@
-# baseballplayer
+# Temporal Analysis on Baseball Players
 Understand baseball players in real-time games
 
 The pre-trained objdect detection model is provided by TensorFlow API:
