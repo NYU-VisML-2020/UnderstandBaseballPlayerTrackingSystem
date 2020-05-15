@@ -49,29 +49,4 @@ with open('data/mlb-youtube-continuous.json', 'r') as f:
             extract_frames_with_certain_activities(video,input_directory,output_directory,start-delta,end-delta,label)
         count+=1
 
-        
-###############################################
-
-video='O35GBDO4IA6O'
-        
-input_directory='/media/felicia/Data/mlb-youtube/continuous_videos/'
-output_directory = '/media/felicia/Data/mlb-youtube/swing_videos/'
-
-
-with open('/home/felicia/research/baseballplayer/mlb-youtube/data/mlb-youtube-continuous.json', 'r') as f:
-    data = json.load(f)
-duration=data[video]['end']-data[video]['start']
-cap = cv2.VideoCapture(input_directory+video+'.mp4')
-fps = cap.get(cv2.CAP_PROP_FPS)   
-delta=duration-int(cap.get(cv2.CAP_PROP_FRAME_COUNT))/fps
-for activity in data[video]['annotations']:
-    label=activity['label']
-    if label=='swing':
-        start, end=activity['segment']
-        label=activity['label']
-        break
-print(start,end,duration,delta)
-
-from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-
-ffmpeg_extract_subclip("O35GBDO4IA6O_full.mp4", start-delta, end-delta, targetname="O35GBDO4IA6O_clip.mp4")
+      
