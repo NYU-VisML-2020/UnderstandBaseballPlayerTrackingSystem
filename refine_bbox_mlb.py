@@ -69,40 +69,6 @@ depth_outputs=depth_dict['outputs'] # B * 240 * 320 *1 , unrescaled
 
 
 
-"""
-# GrabCut  
-
-mask = np.zeros(image_batch.shape[1:3],np.uint8)
-bgdModel = np.zeros((1,65),np.float64)
-fgdModel = np.zeros((1,65),np.float64)
-rect = (0,10,WIDTH,HEIGHT) # rect = (start_x, start_y, width, height): (161,79,WIDTH,HEIGHT)
-
-image_foreground=list()
-gray_foreground=list()
-
-start_time=time.time()
-
-for i in tqdm(range(image_batch.shape[0])): #B*H*W*C
-  cv2.grabCut(image_batch[i],mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
-  mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
-  img_ = image_batch[i]*mask2[:,:,np.newaxis]
-  image_gray = cv2.cvtColor(img_, cv2.COLOR_BGR2GRAY)
-  image_foreground.append(np.expand_dims(img_,axis=0))
-  gray_foreground.append(np.expand_dims(image_gray,axis=0))
-
-elapsed_time = time.time() - start_time
-
-image_foreground=np.concatenate(image_foreground,axis=0) # B*H*W *3
-gray_foreground=np.concatenate(gray_foreground,axis=0) # B*H*W
-
-# print(image_foreground.shape)
-print('Time used in GrubCut ',elapsed_time,BATCH)
-
-"""
-
-
-
-
 def run_inference_for_minibatch_images(images, graph):
   """
   images: numpy.array- B*H *W *C
@@ -383,32 +349,3 @@ for q in quantiles:
       print(i*BATCH+j,'Accuracy', valid_output0['scores'][j])
 
 
-# plt.show()
-
-"""
-
-fig, ax = plt.subplots(figsize=(6, 1))
-fig.subplots_adjust(bottom=0.5)
-
-categorical_colors= ['darkmagenta','darkorchid','mediumorchid', 'orchid','plum', 'gold','orange','coral','orangered','red']
-cmap = mpl.colors.ListedColormap(categorical_colors)
-
-bounds=[x for x in range(-5,6,1)]
-norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-
-cmap_=mpl.cm.ScalarMappable(cmap=cmap, norm=norm)
-cmap_.set_array([]) # or alternatively cmap._A = []
-
-fig.colorbar(
-    cmap_,
-    cax=ax,
-    boundaries= bounds,
-    ticks=bounds,
-    spacing='uniform',
-    orientation='horizontal',
-    label='Categorical',
-)
-
-plt.show()
-
-"""
