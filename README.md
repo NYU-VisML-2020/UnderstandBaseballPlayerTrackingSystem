@@ -8,6 +8,7 @@ And the depth estimation model is provided By [Ibraheem Alhashim and Peter Wonka
 
 The dataset comes from [MLB-Youtube daset](https://github.com/szhaofelicia/mlb-youtube).
 
-Please install TensorFlow Object Detection API before run [refine_bbox_mlb.py](https://github.com/NYU-VisML-2020/UnderstandBaseballPlayerTrackingSystem/blob/master/refine_bbox_mlb.py), and save refine_bbox_mlb.py under the folder models/research/object_detection.
+Please install TensorFlow Object Detection API before running [refine_bbox_mlb.py](https://github.com/NYU-VisML-2020/UnderstandBaseballPlayerTrackingSystem/blob/master/refine_bbox_mlb.py), and save refine_bbox_mlb.py under the folder models/research/object_detection.
 
+Visualize bbox and color box in descending order of detection scores: replace 
 
